@@ -1,5 +1,4 @@
 "use server";
-
 import Razorpay from "razorpay";
 import Payment from "@/models/payment";
 import User from "@/models/user";
@@ -10,12 +9,6 @@ export const initiate = async (amount, to_username, paymentform) => {
   await connectDB();
 
   const user = await User.findOne({ username: to_username });
-
-  console.log("User document:", JSON.stringify(user, null, 2));
-
-  if (!user?.razorID || !user?.razorSecret) {
-    throw new Error("Razorpay keys are missing in database");
-  }
 
   if (!user) {
     throw new Error("User not found");
