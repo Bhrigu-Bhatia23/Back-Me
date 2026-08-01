@@ -95,12 +95,7 @@ export const updateUser = async (data, oldusername) => {
   const ndata = Object.fromEntries(data);
   ndata.username = ndata.username.trim().replace(/\s+/g, "_");
 
-  //console.log("Received FormData:", ndata);
-  console.log("======================");
-  console.log(ndata);
-  console.log("razorID =", JSON.stringify(ndata.razorID));
-  console.log("razorSecret =", JSON.stringify(ndata.razorSecret));
-  console.log("======================");
+  console.log("Received FormData:", ndata);
   console.log("Old username:", oldusername);
   console.log("New username:", ndata.username);
 
@@ -113,15 +108,19 @@ export const updateUser = async (data, oldusername) => {
       return { error: "Username already exists" };
     }
 
+    // await User.updateOne(
+    //   { email: ndata.email },
+    //   ndata
+    // );
     await User.updateOne(
       { email: ndata.email },
-      ndata
+      { $set: ndata }
     );
 
-    // await Payment.updateMany(
-    //   { to_user: oldusername },
-    //   { to_user: ndata.username }
-    // );
+    const updatedUser = await User.findOne({ email: ndata.email });
+
+    console.log("Updated User:", JSON.stringify(updatedUser, null, 2));
+
     const result = await Payment.updateMany(
       { to_user: oldusername },
       { $set: { to_user: ndata.username } }
