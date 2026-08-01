@@ -5,14 +5,14 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 import { fetchUserByEmail } from "@/actions/useractions";
 import { updateUser } from "@/actions/useractions";
-import { useSearchParams } from 'next/navigation';
+//import { useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { Bounce } from 'react-toastify';
 
 const Dashboard = () => {
   const [oldUsername, setOldUsername] = useState("");
   const { data: session, status, update } = useSession();
-  const searchParams = useSearchParams();
+  //const searchParams = useSearchParams();
 
   const router = useRouter();
   const [form, setForm] = useState({
