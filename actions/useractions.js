@@ -10,9 +10,12 @@ export const initiate = async (amount, to_username, paymentform) => {
   await connectDB();
 
   const user = await User.findOne({ username: to_username });
-  console.log("User from DB:", user);
-  console.log("Razor ID:", user?.razorID);
-  console.log("Razor Secret:", user?.razorSecret);
+
+  console.log("User document:", JSON.stringify(user, null, 2));
+
+  if (!user?.razorID || !user?.razorSecret) {
+    throw new Error("Razorpay keys are missing in database");
+  }
 
   if (!user) {
     throw new Error("User not found");
