@@ -57,7 +57,9 @@ const Dashboard = () => {
 
     const formData = new FormData(e.target);
 
-    // const result = await updateUser(formData, form.username);
+console.log("razorID:", formData.get("razorID"));
+console.log("razorSecret:", formData.get("razorSecret"));
+
     const result = await updateUser(formData, oldUsername);
 
     if (result?.error) {
