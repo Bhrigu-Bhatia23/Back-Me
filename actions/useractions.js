@@ -95,7 +95,12 @@ export const updateUser = async (data, oldusername) => {
   const ndata = Object.fromEntries(data);
   ndata.username = ndata.username.trim().replace(/\s+/g, "_");
 
-  console.log("Received FormData:", ndata);
+  //console.log("Received FormData:", ndata);
+  console.log("======================");
+  console.log(ndata);
+  console.log("razorID =", JSON.stringify(ndata.razorID));
+  console.log("razorSecret =", JSON.stringify(ndata.razorSecret));
+  console.log("======================");
   console.log("Old username:", oldusername);
   console.log("New username:", ndata.username);
 
