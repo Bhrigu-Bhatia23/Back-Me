@@ -108,10 +108,6 @@ export const updateUser = async (data, oldusername) => {
       return { error: "Username already exists" };
     }
 
-    // await User.updateOne(
-    //   { email: ndata.email },
-    //   ndata
-    // );
     await User.updateOne(
       { email: ndata.email },
       { $set: ndata }
@@ -128,12 +124,6 @@ export const updateUser = async (data, oldusername) => {
 
     console.log("Update Result:", result);
   }
-  // else {
-  //   await User.updateOne(
-  //     { email: ndata.email },
-  //     ndata
-  //   );
-  // }
 
   else {
     await User.updateOne(
@@ -142,8 +132,6 @@ export const updateUser = async (data, oldusername) => {
     );
 
     const updatedUser = await User.findOne({ email: ndata.email });
-    console.log("razorID =", ndata.razorID);
-    console.log("razorSecret =", ndata.razorSecret);
   }
 
   return { success: true };
@@ -157,6 +145,7 @@ const getAllCreators = async () => {
   const updatedCreators = creators.map(async (creator) => {
     const payments = await Payment.find({
       to_user: creator.username,
+      done: true,
     });
 
     const supporters = payments.length;
