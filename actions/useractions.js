@@ -142,7 +142,8 @@ export const updateUser = async (data, oldusername) => {
     );
 
     const updatedUser = await User.findOne({ email: ndata.email });
-    console.log("Updated User:", JSON.stringify(updatedUser, null, 2));
+    console.log("razorID =", ndata.razorID);
+    console.log("razorSecret =", ndata.razorSecret);
   }
 
   return { success: true };
