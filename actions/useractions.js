@@ -127,11 +127,22 @@ export const updateUser = async (data, oldusername) => {
     );
 
     console.log("Update Result:", result);
-  } else {
+  }
+  // else {
+  //   await User.updateOne(
+  //     { email: ndata.email },
+  //     ndata
+  //   );
+  // }
+
+  else {
     await User.updateOne(
       { email: ndata.email },
-      ndata
+      { $set: ndata }
     );
+
+    const updatedUser = await User.findOne({ email: ndata.email });
+    console.log("Updated User:", JSON.stringify(updatedUser, null, 2));
   }
 
   return { success: true };
